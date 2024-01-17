@@ -23,12 +23,15 @@ const AdminMenu = () => {
   };
 
   const deleteHandler = async (id) => {
-    const response = await fetch(`${process.env.API_URL}/admin/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/admin/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     const result = await response.json();
 
     if (response.ok) {

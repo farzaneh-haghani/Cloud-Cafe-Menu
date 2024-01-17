@@ -5,15 +5,14 @@ import Form from "./pages/Form";
 import AppContext from "./components/Context";
 import { useEffect, useState } from "react";
 
-
 function App() {
   const [data, setData] = useState([]);
   const [id, setId] = useState(0);
   const [adminData, setAdminData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  console.log(process.env.REACT_APP_API_URL);
   useEffect(() => {
-    fetch("http://localhost:3008")
+    fetch(process.env.REACT_APP_API_URL)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Something went wrong.");
@@ -31,13 +30,14 @@ function App() {
   }, []);
 
   return (
-    <AppContext.Provider value={{ data, setData, id, setId, adminData, setAdminData, isLoading }}>
+    <AppContext.Provider
+      value={{ data, setData, id, setId, adminData, setAdminData, isLoading }}
+    >
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/admin" element={<AdminMenu />} />
           <Route path="/admin/form" element={<Form />} />
-
         </Routes>
       </Router>
     </AppContext.Provider>

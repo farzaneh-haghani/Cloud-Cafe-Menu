@@ -13,7 +13,7 @@ app.use(cors({ origin: true, credentials: true }));
 
 const db = new Pool({
   connectionString: process.env.DB_URL,
-  // ssl: { rejectUnauthorized: false },
+  ssl: { rejectUnauthorized: false },
 });
 
 db.connect();
@@ -105,7 +105,8 @@ app.put("/admin/meals/:id/edit", (req, res) => {
 //--------------------ADD------------------------------
 app.post("/admin/add", (req, res) => {
   const { title, category, price, img, descript } = req.body;
-  const insertQuery = "INSERT INTO menu (title,category,price,img,descript) VALUES ($1,$2,$3,$4,$5) RETURNING *";
+  const insertQuery =
+    "INSERT INTO menu (title,category,price,img,descript) VALUES ($1,$2,$3,$4,$5) RETURNING *";
   const values = [title, category, price, img, descript];
 
   db.query(insertQuery, values)
@@ -113,7 +114,7 @@ app.post("/admin/add", (req, res) => {
       const newItem = result.rows[0];
       res.status(200).json({ success: true, item: newItem });
     })
-    .catch((err) => res.status(500).json({ success: false, error: err }))
+    .catch((err) => res.status(500).json({ success: false, error: err }));
 });
 
 //--------------------DELETE---------------------------
@@ -122,26 +123,23 @@ app.delete("/admin/:id", (req, res) => {
   if (isNaN(id)) {
     res.status(400).json({
       success: "failure",
-      message: "This id does not exist"
-    })
-  }
-  else {
+      message: "This id does not exist",
+    });
+  } else {
     db.query("DELETE FROM menu WHERE id = $1 ", [id])
       .then((result) => {
         if (result.rowCount === 0) {
           res.status(400).json({
             success: "failure",
-            message: "This id does not exist"
-          })
-        }
-        else {
+            message: "This id does not exist",
+          });
+        } else {
           res.status(200).json({ success: true });
         }
       })
       .catch((err) => console.error(err));
   }
 });
-
 
 //--------------------PORT---------------------------
 const port = process.env.PORT ?? 3008;

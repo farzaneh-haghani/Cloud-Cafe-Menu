@@ -6,7 +6,7 @@ function Search({ setAdminData, setIsSearching }) {
   function handleSubmit(event) {
     event.preventDefault();
     if (keyword) {
-      fetch(`http://localhost:3008/admin/q?str=${keyword}`)
+      fetch(`${process.env.REACT_APP_API_URL}/admin/q?str=${keyword}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("No items match.");
