@@ -10,7 +10,7 @@ function App() {
   const [id, setId] = useState(0);
   const [adminData, setAdminData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  console.log(process.env.REACT_APP_API_URL);
+
   useEffect(() => {
     fetch(process.env.REACT_APP_API_URL)
       .then((response) => {
@@ -22,7 +22,7 @@ function App() {
       .then((data) => {
         setData(data);
         setAdminData(data);
-        setIsLoading(!isLoading);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);

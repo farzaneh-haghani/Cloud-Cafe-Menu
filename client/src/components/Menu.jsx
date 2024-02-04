@@ -27,6 +27,12 @@ const Menu = ({ items }) => {
             <div className="m-8 w-20 h-5 mt-3 bg-gray-700"></div>
             <div className="m-8 w-72 h-5 mt-3 bg-gray-700"></div>
           </div>
+          <div className="my-8 rounded shadow-lg shadow-gray-900  bg-gray-800">
+            <div className="rounded-t h-72 w-full bg-gray-950"></div>
+            <div className="m-8 w-72 h-5 bg-gray-700"></div>
+            <div className="m-8 w-20 h-5 mt-3 bg-gray-700"></div>
+            <div className="m-8 w-72 h-5 mt-3 bg-gray-700"></div>
+          </div>
         </>
       )}
 

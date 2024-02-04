@@ -11,7 +11,7 @@ const AdminMenu = () => {
 
   useEffect(() => {
     setAdminData(data);
-  }, [data, isDeleted]);
+  }, [data, isDeleted, setAdminData]);
 
   function handleClick(rowId) {
     setActiveRow(rowId === activeRow ? null : rowId);
@@ -32,7 +32,7 @@ const AdminMenu = () => {
         },
       }
     );
-    const result = await response.json();
+    await response.json();
 
     if (response.ok) {
       const itemIndex = data.findIndex((item) => item.id === id);

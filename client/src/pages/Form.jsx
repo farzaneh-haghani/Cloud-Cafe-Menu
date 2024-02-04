@@ -14,29 +14,28 @@ function Form() {
   const [img, setImg] = useState("");
   const navigate = useNavigate();
 
-  const fetchEditData = async () => {
-    try {
-      const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/admin/meals/${id}/edit`
-      );
-      if (!res.ok) {
-        throw new Error("Failed to find menu item");
-      }
-      const editData = await res.json();
-      setFetchSuccess(true);
-      setCategory(editData.category);
-      setDescript(editData.descript);
-      setImg(editData.img);
-      setTitle(editData.title);
-      setPrice(editData.price);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   useEffect(() => {
+    const fetchEditData = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.REACT_APP_API_URL}/admin/meals/${id}/edit`
+        );
+        if (!res.ok) {
+          throw new Error("Failed to find menu item");
+        }
+        const editData = await res.json();
+        setFetchSuccess(true);
+        setCategory(editData.category);
+        setDescript(editData.descript);
+        setImg(editData.img);
+        setTitle(editData.title);
+        setPrice(editData.price);
+      } catch (error) {
+        console.error(error);
+      }
+    };
     fetchEditData();
-  }, []);
+  }, [id]);
 
   const editItem = async (e) => {
     e.preventDefault();
